@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Módulos / Serviços</h2>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-link">Voltar ao painel</a>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Serviços cadastrados</h5>
+          {% if services %}
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Descrição</th>
+                  <th>Ativo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for s in services %}
+                <tr>
+                  <td>{{ s.name }}</td>
+                  <td>{{ s.description or '-' }}</td>
+                  <td>
+                    {% if s.active %}
+                      <span class="badge bg-success">Sim</span>
+                    {% else %}
+                      <span class="badge bg-secondary">Não</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+            <p class="text-muted mb-0">Nenhum serviço cadastrado ainda.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Vínculos entre profissionais e módulos</h5>
+          {% if links %}
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>Profissional</th>
+                  <th>Módulo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for l in links %}
+                <tr>
+                  <td>{{ l.professional_name }}</td>
+                  <td>{{ l.service_name }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+            <p class="text-muted mb-0">Nenhum vínculo cadastrado ainda.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Cadastrar novo módulo / serviço</h5>
+          <form method="post" action="{{ url_for('admin_servicos') }}">
+            <input type="hidden" name="form_type" value="new_service">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nome *</label>
+              <input type="text" name="name" id="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descrição</label>
+              <textarea name="description" id="description" rows="3" class="form-control"></textarea>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Salvar módulo</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Vincular profissional a módulo</h5>
+          <form method="post" action="{{ url_for('admin_servicos') }}">
+            <input type="hidden" name="form_type" value="link">
+            <div class="mb-3">
+              <label for="professional_id" class="form-label">Profissional *</label>
+              <select name="professional_id" id="professional_id" class="form-select" required>
+                <option value="">Selecione</option>
+                {% for p in professionals %}
+                <option value="{{ p.id }}">{{ p.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="service_id" class="form-label">Módulo *</label>
+              <select name="service_id" id="service_id" class="form-select" required>
+                <option value="">Selecione</option>
+                {% for s in services %}
+                <option value="{{ s.id }}">{{ s.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success">Vincular</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

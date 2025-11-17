@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="mb-4">Painel do Gestor</h2>
+
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card text-center shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Agendamentos de hoje</h5>
+          <p class="display-5">{{ total_today }}</p>
+          <p class="text-muted">Data: {{ today.strftime('%d/%m/%Y') }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Próximos agendamentos</h5>
+          {% if upcoming %}
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Horário</th>
+                  <th>Cliente</th>
+                  <th>Profissional</th>
+                  <th>Módulo</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for a in upcoming %}
+                <tr>
+                  <td>{{ a.appointment_date.strftime('%d/%m/%Y') }}</td>
+                  <td>{{ a.appointment_time.strftime('%H:%M') }}</td>
+                  <td>{{ a.client_name }}</td>
+                  <td>{{ a.professional_name }}</td>
+                  <td>{{ a.service_name }}</td>
+                  <td>
+                    {% if a.status == 'scheduled' %}
+                      <span class="badge bg-success">Confirmado</span>
+                    {% else %}
+                      <span class="badge bg-secondary">{{ a.status }}</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+            <p class="text-muted mb-0">Nenhum agendamento futuro encontrado.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap gap-2">
+    <a href="{{ url_for('admin_agendamentos') }}" class="btn btn-outline-primary">Ver todos os agendamentos</a>
+    <a href="{{ url_for('admin_profissionais') }}" class="btn btn-outline-secondary">Profissionais</a>
+    <a href="{{ url_for('admin_servicos') }}" class="btn btn-outline-secondary">Módulos / Serviços</a>
+    <a href="{{ url_for('admin_relatorios') }}" class="btn btn-outline-secondary">Relatórios</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger ms-auto">Sair</a>
+  </div>
+{% endblock %}

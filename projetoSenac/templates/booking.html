@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Agendar atendimento • Agenda Multimodular{% endblock %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-xl-8 col-lg-9">
+      <div class="mb-4 text-center">
+        <h2 class="fw-semibold mb-2">Agende seu atendimento</h2>
+        <p class="text-muted mb-0">
+          Preencha seus dados, escolha o profissional, o módulo e o horário desejado.
+        </p>
+      </div>
+      <form method="post" action="{{ url_for('agendar') }}" class="card border-0 shadow-lg booking-card">
+        <div class="card-body p-4 p-md-5">
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Nome completo *</label>
+              <input type="text" name="name" id="name" class="form-control form-control-lg" required>
+            </div>
+            <div class="col-md-3">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="opcional">
+            </div>
+            <div class="col-md-3">
+              <label for="phone" class="form-label">Telefone / WhatsApp</label>
+              <input type="text" name="phone" id="phone" class="form-control form-control-lg" placeholder="opcional">
+            </div>
+          </div>
+
+          <div class="divider-label mb-3">
+            <span>Atendimento</span>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label for="professional_id" class="form-label">Profissional *</label>
+              <select name="professional_id" id="professional_id" class="form-select form-select-lg" required>
+                <option value="">Selecione um profissional</option>
+                {% for p in professionals %}
+                <option value="{{ p.id }}">{{ p.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="service_id" class="form-label">Módulo / Serviço *</label>
+              <select name="service_id" id="service_id" class="form-select form-select-lg" required disabled>
+                <option value="">Selecione primeiro um profissional</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <label for="date" class="form-label">Data do atendimento *</label>
+              <input
+                type="text"
+                name="date"
+                id="date"
+                class="form-control form-control-lg"
+                placeholder="dd/mm/aaaa"
+                value="{{ today }}"
+                required
+              >
+              <div class="form-text">Formato dia/mês/ano (ex: 16/11/2025).</div>
+            </div>
+            <div class="col-md-4">
+              <label for="time" class="form-label">Horário *</label>
+              <select name="time" id="time" class="form-select form-select-lg" required disabled>
+                <option value="">Selecione a data e o profissional</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Resumo</label>
+              <div class="small text-muted bg-body-tertiary rounded-3 p-3 h-100 d-flex align-items-center">
+                O horário é reservado exclusivamente para o profissional escolhido. Evite atrasos para não impactar os próximos atendimentos.
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between flex-wrap gap-3 align-items-center">
+            <span class="small text-muted">* Campos obrigatórios.</span>
+            <button type="submit" class="btn btn-success btn-lg px-4">
+              Confirmar agendamento
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

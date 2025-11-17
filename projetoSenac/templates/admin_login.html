@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <h2 class="mb-3 text-center">Área do Gestor</h2>
+      <p class="text-muted text-center mb-4">
+        Faça login para acessar a agenda completa, os profissionais, módulos e relatórios.
+      </p>
+      <form method="post" action="{{ url_for('admin_login') }}" class="card shadow-sm p-4">
+        <div class="mb-3">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" name="email" id="email" class="form-control" required value="admin@agenda.com">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Senha</label>
+          <input type="password" name="password" id="password" class="form-control" required value="admin123">
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

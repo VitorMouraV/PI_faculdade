@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Relatórios de atendimentos</h2>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-link">Voltar ao painel</a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <p class="text-muted">
+        A tabela abaixo apresenta a quantidade de agendamentos por dia (apenas agendamentos com status
+        <strong>Confirmado</strong>). O dia com maior volume é destacado.
+      </p>
+
+      {% if stats %}
+      <div class="table-responsive">
+        <table class="table table-sm align-middle">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Total de agendamentos</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in stats %}
+            <tr class="{% if row.total == max_total and max_total > 0 %}table-success{% endif %}">
+              <td>{{ row.appointment_date.strftime('%d/%m/%Y') }}</td>
+              <td>{{ row.total }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <p class="text-muted mb-0">Ainda não há dados suficientes para gerar o relatório.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

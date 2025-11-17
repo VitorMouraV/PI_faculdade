@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h2 class="mb-3 text-success">Agendamento concluído!</h2>
+          <p class="mb-4">
+            Seu horário foi registrado com sucesso. Confira abaixo os detalhes do atendimento.
+          </p>
+          <ul class="list-group text-start mb-4">
+            <li class="list-group-item"><strong>Nome do cliente:</strong> {{ appointment.name }}</li>
+            {% if appointment.email %}
+            <li class="list-group-item"><strong>E-mail:</strong> {{ appointment.email }}</li>
+            {% endif %}
+            {% if appointment.phone %}
+            <li class="list-group-item"><strong>Telefone:</strong> {{ appointment.phone }}</li>
+            {% endif %}
+            <li class="list-group-item"><strong>Profissional:</strong> {{ appointment.professional_name }}</li>
+            <li class="list-group-item"><strong>Módulo / Serviço:</strong> {{ appointment.service_name }}</li>
+            <li class="list-group-item">
+              <strong>Data:</strong> {{ appointment.appointment_date.strftime('%d/%m/%Y') }}
+            </li>
+            <li class="list-group-item">
+              <strong>Horário:</strong> {{ appointment.appointment_time.strftime('%H:%M') }}
+            </li>
+            <li class="list-group-item">
+              <strong>Status:</strong>
+              {% if appointment.status == 'scheduled' %}
+                Confirmado
+              {% else %}
+                {{ appointment.status }}
+              {% endif %}
+            </li>
+          </ul>
+          <a href="{{ url_for('index') }}" class="btn btn-primary">Voltar para a página inicial</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

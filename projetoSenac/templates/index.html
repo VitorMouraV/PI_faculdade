@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Início • Agenda Multimodular{% endblock %}
+{% block content %}
+  <section class="hero rounded-4 p-4 p-md-5 mb-5 position-relative overflow-hidden">
+    <div class="hero-bg-gradient"></div>
+    <div class="row align-items-center position-relative">
+      <div class="col-lg-7">
+        <span class="badge text-bg-dark bg-opacity-75 rounded-pill mb-3 px-3 py-2 d-inline-flex align-items-center gap-2">
+          <span class="status-dot"></span>
+          Sistema ativo para academias, estúdios e clínicas
+        </span>
+        <h1 class="hero-title mb-3">
+          Centralize <span class="text-gradient">todos os atendimentos</span> em uma única agenda online.
+        </h1>
+        <p class="hero-subtitle mb-4">
+          Personal trainers, nutricionistas, fisioterapeutas, psicólogos e outros profissionais podem
+          organizar seus horários, módulos de atendimento e clientes em uma plataforma simples e moderna.
+        </p>
+        <div class="d-flex flex-wrap gap-3 mb-4">
+          <a href="{{ url_for('agendar') }}" class="btn btn-light btn-lg px-4">
+            Agendar atendimento
+          </a>
+          <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-light btn-lg px-4">
+            Área do gestor
+          </a>
+        </div>
+        <div class="d-flex flex-wrap gap-4 hero-metrics">
+          <div>
+            <p class="h4 mb-0">+10</p>
+            <p class="text-muted mb-0 small">tipos de módulos em um único sistema</p>
+          </div>
+          <div>
+            <p class="h4 mb-0">Agenda unificada</p>
+            <p class="text-muted mb-0 small">por profissional e por serviço</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 mt-4 mt-lg-0">
+        <div class="card shadow-lg border-0 glass-card">
+          <div class="card-body p-4">
+            <h5 class="card-title mb-3">Exemplo de uso</h5>
+            <ul class="list-unstyled small mb-0">
+              <li class="d-flex gap-3 mb-3">
+                <div class="icon-pill">PT</div>
+                <div>
+                  <strong>Denner, Personal Trainer</strong><br>
+                  Cadastra módulos de avaliação física e treino personalizado e controla toda a agenda de alunos.
+                </div>
+              </li>
+              <li class="d-flex gap-3 mb-3">
+                <div class="icon-pill">NT</div>
+                <div>
+                  <strong>Carla, Nutricionista</strong><br>
+                  Organiza consultas iniciais e retornos sem depender de planilhas ou mensagens soltas.
+                </div>
+              </li>
+              <li class="d-flex gap-3">
+                <div class="icon-pill">CL</div>
+                <div>
+                  <strong>Estúdio multidisciplinar</strong><br>
+                  Vários profissionais, cada um com seus módulos, compartilhando uma agenda única por horário.
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <h5>Fluxo do cliente simplificado</h5>
+          <p>O cliente escolhe o profissional, o módulo, a data e o horário disponível em poucos cliques, sem precisar falar com ninguém.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <h5>Controle por profissional</h5>
+          <p>Cada horário é exclusivo por profissional, evitando conflitos e garantindo uma visão clara da agenda individual.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <h5>Painel do gestor</h5>
+          <p>Resumo do dia, próximos atendimentos, relatórios por data e gestão de profissionais e módulos em um só lugar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
