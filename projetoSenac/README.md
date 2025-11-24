@@ -1,3 +1,10 @@
+# Integrantes
+- Vitor Moura Vicente
+- Diego Henrique do Nascimento Costa
+- Cauan Santana Silva
+- Pedro Henrique Souza Alves
+- Kaik Gabriel Carvalho Oliveira
+
 # Sistema de Agendamentos Multimodular
 
 Evolução do sistema de agenda online para suportar múltiplos profissionais e módulos de atendimento.
